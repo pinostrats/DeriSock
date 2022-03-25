@@ -14,6 +14,7 @@ env:
   NUGET_SOURCE_URL: https://api.nuget.org/v3/index.json  
   PACKAGE_ID: DeriSock.Pinostrats
   REPOSITORY_URL: https://github.com/pinostrats/DeriSock
+  NUGET_KEY: ${{ secrets.NUGET_KEY }}
 
 jobs:
   deploy:
@@ -42,4 +43,4 @@ jobs:
       run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }} -p:PackageId=${{ env.PACKAGE_ID }} -p:RepositoryUrl=${{ env.REPOSITORY_URL }}
 
     - name: 'Push package'
-      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -k ${{ secrets.NUGET_KEY }} -s ${{ env.NUGET_SOURCE_URL }}
+      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -k "$env:SUPER_SECRET" -s ${{ env.NUGET_SOURCE_URL }}
