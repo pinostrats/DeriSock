@@ -70,6 +70,7 @@
           var summary = await _client.PrivateGetAccountSummary("BTC", false);
 
           var instruments = await _client.PublicGetInstruments("BTC");
+          var ticker = await _client.PublicTicker("BTC-30SEP22-50000-C");
 
           var sub = _client.SubscribePerpetualInterestRate(
             new PerpetualInterestRateSubscriptionParams { Interval = "100ms", InstrumentName = "BTC" },
