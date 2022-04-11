@@ -274,9 +274,11 @@
       CloseStatusDescription = args.CloseStatusDescription;
       Error = args.Exception;
 
-      if (args.Exception != null)
+      if (args.Exception != null &&
+          (Socket.State is WebSocketState.Open or WebSocketState.CloseReceived or WebSocketState.CloseSent))
       {
-        Socket.CloseAsync(args.CloseStatus, args.CloseStatusDescription, CancellationToken.None).GetAwaiter().GetResult();
+        Socket.CloseAsync(args.CloseStatus, args.CloseStatusDescription, CancellationToken.None).GetAwaiter()
+          .GetResult();
       }
 
       Socket?.Dispose();
