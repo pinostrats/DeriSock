@@ -1,21 +1,22 @@
-﻿namespace DeriSock.Model;
-
-using Newtonsoft.Json;
-
-public class PerpetualUserTrades
+﻿namespace DeriSock.Model
 {
-  /// <summary>
-  ///   Current interest
-  /// </summary>
-  [JsonProperty("current_interest")]
-  public decimal CurrentInterest { get; set; }
+  using Newtonsoft.Json;
 
-  [JsonProperty("data")]
-  public PerpetualUserTradesDataItem[] Data { get; set; }
+  public class PerpetualUserTrades
+  {
+    /// <summary>
+    ///   Current interest
+    /// </summary>
+    [JsonProperty("current_interest")]
+    public decimal CurrentInterest { get; set; }
 
-  /// <summary>
-  ///   Current interest 8h
-  /// </summary>
-  [JsonProperty("interest_8h")]
-  public decimal Interest8H { get; set; }
+    [JsonProperty("data")]
+    public PerpetualUserTradesDataItem[] Data { get; set; }
+
+    /// <summary>
+    ///   Current interest 8h
+    /// </summary>
+    [JsonProperty("interest_8h")]
+    public decimal Interest8H { get; set; }
+  }
 }

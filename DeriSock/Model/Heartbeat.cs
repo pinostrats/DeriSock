@@ -1,18 +1,19 @@
-﻿namespace DeriSock.Model;
-
-using DeriSock.JsonRpc;
-using Newtonsoft.Json;
-
-public class Heartbeat : JsonRpcRequest
+﻿namespace DeriSock.Model
 {
-  [JsonProperty("params")]
-  public new HeartbeatParams Params { get; set; }
+  using DeriSock.JsonRpc;
+  using Newtonsoft.Json;
 
-  public string Type => Params.Type;
-
-  public class HeartbeatParams
+  public class Heartbeat : JsonRpcRequest
   {
-    [JsonProperty("type")]
-    public string Type { get; set; }
+    [JsonProperty("params")]
+    public new HeartbeatParams Params { get; set; }
+
+    public string Type => Params.Type;
+
+    public class HeartbeatParams
+    {
+      [JsonProperty("type")]
+      public string Type { get; set; }
+    }
   }
 }

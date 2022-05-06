@@ -1,18 +1,19 @@
-﻿namespace DeriSock.Utils;
-
-using System.Threading;
-
-public class RequestIdGenerator
+﻿namespace DeriSock.Utils
 {
-  private readonly object _idLock = new();
-  private volatile int _lastId;
+  using System.Threading;
 
-  public int Next()
+  public class RequestIdGenerator
   {
-    lock (_idLock)
+    private readonly object _idLock = new object();
+    private volatile int _lastId;
+
+    public int Next()
     {
-      Interlocked.CompareExchange(ref _lastId, 0, int.MaxValue);
-      return ++_lastId;
+      lock (_idLock)
+      {
+        Interlocked.CompareExchange(ref _lastId, 0, int.MaxValue);
+        return ++_lastId;
+      }
     }
   }
 }

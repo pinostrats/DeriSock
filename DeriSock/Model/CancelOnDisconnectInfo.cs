@@ -1,12 +1,13 @@
-﻿namespace DeriSock.Model;
-
-using Newtonsoft.Json;
-
-public class CancelOnDisconnectInfo
+﻿namespace DeriSock.Model
 {
-  [JsonProperty("enabled")]
-  public bool Enabled { get; set; }
+  using Newtonsoft.Json;
 
-  [JsonProperty("scope")]
-  public string Scope { get; set; }
+  public class CancelOnDisconnectInfo
+  {
+    [JsonProperty("enabled")]
+    public bool Enabled { get; set; }
+
+    [JsonProperty("scope")]
+    public string Scope { get; set; }
+  }
 }

@@ -18,18 +18,15 @@ env:
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup dotnet
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: |
-          3.1.x
-          5.0.x
-          6.0.x
+        dotnet-version: '5.x'
 
     - name: Restore packages
       run: dotnet restore ${{ env.PROJECT_PATH }}
@@ -37,7 +34,7 @@ jobs:
     - name: Build project
       run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
 
-    - name: Get version
+    - name: Get Version
       id: version
       uses: battila7/get-version-action@v2
 

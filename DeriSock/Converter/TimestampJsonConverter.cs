@@ -1,12 +1,13 @@
-﻿namespace DeriSock.Converter;
-
-using System;
-using Newtonsoft.Json.Linq;
-
-internal class TimestampJsonConverter : IJsonConverter<DateTime>
+﻿namespace DeriSock.Converter
 {
-  public DateTime Convert(JToken value)
+  using System;
+  using Newtonsoft.Json.Linq;
+
+  public class TimestampJsonConverter : IJsonConverter<DateTime>
   {
-    return value.ToObject<long>().AsDateTimeFromMilliseconds();
+    public DateTime Convert(JToken value)
+    {
+      return value.ToObject<long>().AsDateTimeFromMilliseconds();
+    }
   }
 }

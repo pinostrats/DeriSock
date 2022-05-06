@@ -1,5 +1,6 @@
-﻿namespace DeriSock.Request;
-
-public class SellParams : BuyParams
+﻿namespace DeriSock.Request
 {
+  public class SellParams : BuyParams
+  {
+  }
 }

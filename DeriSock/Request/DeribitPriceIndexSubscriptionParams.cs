@@ -1,18 +1,19 @@
-﻿namespace DeriSock.Request;
-
-using Newtonsoft.Json;
-
-public class DeribitPriceIndexSubscriptionParams : ISubscriptionChannel
+﻿namespace DeriSock.Request
 {
-  /// <summary>
-  ///   <para>Index identifier, matches (base) crypto currency with quote currency</para>
-  ///   <para>Enum: <c>btc_usd</c>, <c>eth_usd</c></para>
-  /// </summary>
-  [JsonProperty("index_name")]
-  public string IndexName { get; set; }
+  using Newtonsoft.Json;
 
-  public string ToChannelName()
+  public class DeribitPriceIndexSubscriptionParams : ISubscriptionChannel
   {
-    return $"deribit_price_index.{IndexName}";
+    /// <summary>
+    ///   <para>Index identifier, matches (base) crypto currency with quote currency</para>
+    ///   <para>Enum: <c>btc_usd</c>, <c>eth_usd</c></para>
+    /// </summary>
+    [JsonProperty("index_name")]
+    public string IndexName { get; set; }
+
+    public string ToChannelName()
+    {
+      return $"deribit_price_index.{IndexName}";
+    }
   }
 }

@@ -1,17 +1,18 @@
-﻿namespace DeriSock.Request;
-
-using Newtonsoft.Json;
-
-public class QuoteSubscriptionParams : ISubscriptionChannel
+﻿namespace DeriSock.Request
 {
-  /// <summary>
-  ///   Instrument name
-  /// </summary>
-  [JsonProperty("instrument_name")]
-  public string InstrumentName { get; set; }
+  using Newtonsoft.Json;
 
-  public string ToChannelName()
+  public class QuoteSubscriptionParams : ISubscriptionChannel
   {
-    return $"quote.{InstrumentName}";
+    /// <summary>
+    ///   Instrument name
+    /// </summary>
+    [JsonProperty("instrument_name")]
+    public string InstrumentName { get; set; }
+
+    public string ToChannelName()
+    {
+      return $"quote.{InstrumentName}";
+    }
   }
 }

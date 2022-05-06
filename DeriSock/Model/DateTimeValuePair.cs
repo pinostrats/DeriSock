@@ -1,16 +1,17 @@
-﻿namespace DeriSock.Model;
-
-using System;
-using Newtonsoft.Json;
-
-public class DateTimeValuePair
+﻿namespace DeriSock.Model
 {
-  [JsonProperty(Order = 1)]
-  public long Timestamp { get; set; }
+  using System;
+  using Newtonsoft.Json;
 
-  [JsonIgnore]
-  public DateTime DateTime => Timestamp.AsDateTimeFromMilliseconds();
+  public class DateTimeValuePair
+  {
+    [JsonProperty(Order = 1)]
+    public long Timestamp { get; set; }
 
-  [JsonProperty(Order = 2)]
-  public decimal Value { get; set; }
+    [JsonIgnore]
+    public DateTime DateTime => Timestamp.AsDateTimeFromMilliseconds();
+
+    [JsonProperty(Order = 2)]
+    public decimal Value { get; set; }
+  }
 }

@@ -1,9 +1,10 @@
-﻿namespace DeriSock.Utils;
-
-public class SignatureData
+﻿namespace DeriSock.Utils
 {
-  public long Timestamp { get; set; }
-  public string Nonce { get; set; } = string.Empty;
-  public string Data { get; set; } = string.Empty;
-  public string Signature { get; set; }
+  public class SignatureData
+  {
+    public long Timestamp { get; set; }
+    public string Nonce { get; set; } = string.Empty;
+    public string Data { get; set; } = string.Empty;
+    public string Signature { get; set; }
+  }
 }

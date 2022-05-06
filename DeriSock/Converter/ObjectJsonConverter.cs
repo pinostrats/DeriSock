@@ -1,13 +1,12 @@
-﻿namespace DeriSock.Converter;
-
-using Newtonsoft.Json.Linq;
-
-/// <inheritdoc />
-public class ObjectJsonConverter<T> : IJsonConverter<T>
+﻿namespace DeriSock.Converter
 {
-  /// <inheritdoc />
-  public T Convert(JToken value)
+  using Newtonsoft.Json.Linq;
+
+  public class ObjectJsonConverter<T> : IJsonConverter<T>
   {
-    return value.ToObject<T>();
+    public T Convert(JToken value)
+    {
+      return value.ToObject<T>();
+    }
   }
 }

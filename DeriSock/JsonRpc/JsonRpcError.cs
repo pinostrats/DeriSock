@@ -1,16 +1,17 @@
-﻿namespace DeriSock.JsonRpc;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-public class JsonRpcError
+﻿namespace DeriSock.JsonRpc
 {
-  [JsonProperty("code")]
-  public int Code { get; set; }
+  using Newtonsoft.Json;
+  using Newtonsoft.Json.Linq;
 
-  [JsonProperty("message")]
-  public string Message { get; set; }
+  public class JsonRpcError
+  {
+    [JsonProperty("code")]
+    public int Code { get; set; }
 
-  [JsonProperty("data")]
-  public JToken Data { get; set; }
+    [JsonProperty("message")]
+    public string Message { get; set; }
+
+    [JsonProperty("data")]
+    public JToken Data { get; set; }
+  }
 }

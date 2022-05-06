@@ -1,12 +1,13 @@
-﻿namespace DeriSock.Model;
-
-using Newtonsoft.Json;
-
-public class CurrencyWithdrawalPriority
+﻿namespace DeriSock.Model
 {
-  [JsonProperty("name")]
-  public string Name { get; set; }
+  using Newtonsoft.Json;
 
-  [JsonProperty("value")]
-  public decimal Value { get; set; }
+  public class CurrencyWithdrawalPriority
+  {
+    [JsonProperty("name")]
+    public string Name { get; set; }
+
+    [JsonProperty("value")]
+    public decimal Value { get; set; }
+  }
 }

@@ -1,12 +1,13 @@
-﻿namespace DeriSock.Model;
-
-using Newtonsoft.Json;
-
-public class SubAccountPortfolios
+﻿namespace DeriSock.Model
 {
-  [JsonProperty("btc")]
-  public SubAccountPortfolio Btc { get; set; }
+  using Newtonsoft.Json;
 
-  [JsonProperty("eth")]
-  public SubAccountPortfolio Eth { get; set; }
+  public class SubAccountPortfolios
+  {
+    [JsonProperty("btc")]
+    public SubAccountPortfolio Btc { get; set; }
+
+    [JsonProperty("eth")]
+    public SubAccountPortfolio Eth { get; set; }
+  }
 }

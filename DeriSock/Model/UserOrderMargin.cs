@@ -1,18 +1,19 @@
-﻿namespace DeriSock.Model;
-
-using Newtonsoft.Json;
-
-public class UserOrderMargin
+﻿namespace DeriSock.Model
 {
-  /// <summary>
-  ///   Initial margin of order, in base currency
-  /// </summary>
-  [JsonProperty("initial_margin")]
-  public decimal? InitialMargin { get; set; }
+  using Newtonsoft.Json;
 
-  /// <summary>
-  ///   Unique order identifier
-  /// </summary>
-  [JsonProperty("order_id")]
-  public string OrderId { get; set; }
+  public class UserOrderMargin
+  {
+    /// <summary>
+    ///   Initial margin of order, in base currency
+    /// </summary>
+    [JsonProperty("initial_margin")]
+    public decimal? InitialMargin { get; set; }
+
+    /// <summary>
+    ///   Unique order identifier
+    /// </summary>
+    [JsonProperty("order_id")]
+    public string OrderId { get; set; }
+  }
 }

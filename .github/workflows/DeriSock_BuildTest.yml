@@ -2,38 +2,29 @@ name: Build and Test DeriSock Project
 
 on:
   push:
-    branches:
-      - master
-    tags-ignore:
-      - v*
+    branches: [ master ]
   pull_request:
-    branches:
-      - master
-    tags-ignore:
-      - v*
+    branches: [ master ]
 
 jobs:
   build_test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v2
       
-    - name: Setup dotnet
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: |
-          3.1.x
-          5.0.x
-          6.0.x
+        dotnet-version: '3.1.x'
 
-    - name: Restore packages
+    - name: Restore Packages
       run: |
         dotnet restore DeriSock
 #        dotnet restore DeriSock.Tests
         
-    - name: Build project
+    - name: Build with dotnet
       run: |
         dotnet build --no-restore --configuration Release DeriSock
 #        dotnet build --no-restore --configuration Release DeriSock.Tests

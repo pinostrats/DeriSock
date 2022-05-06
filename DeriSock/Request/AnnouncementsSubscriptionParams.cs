@@ -1,9 +1,10 @@
-﻿namespace DeriSock.Request;
-
-public class AnnouncementsSubscriptionParams : ISubscriptionChannel
+﻿namespace DeriSock.Request
 {
-  public string ToChannelName()
+  public class AnnouncementsSubscriptionParams : ISubscriptionChannel
   {
-    return "announcements";
+    public string ToChannelName()
+    {
+      return "announcements";
+    }
   }
 }

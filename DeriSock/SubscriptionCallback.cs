@@ -1,16 +1,17 @@
-﻿namespace DeriSock;
-
-using System;
-using DeriSock.Model;
-
-public class SubscriptionCallback
+﻿namespace DeriSock
 {
-  public Action<Notification> Action { get; }
-  public SubscriptionToken Token { get; }
+  using System;
+  using DeriSock.Model;
 
-  public SubscriptionCallback(SubscriptionToken token, Action<Notification> action)
+  public class SubscriptionCallback
   {
-    Token = token;
-    Action = action;
+    public Action<Notification> Action { get; }
+    public SubscriptionToken Token { get; }
+
+    public SubscriptionCallback(SubscriptionToken token, Action<Notification> action)
+    {
+      Token = token;
+      Action = action;
+    }
   }
 }

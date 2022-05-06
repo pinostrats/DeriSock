@@ -1,15 +1,16 @@
-﻿namespace DeriSock.Model;
-
-using Newtonsoft.Json;
-
-public class UserStopOrderCollection
+﻿namespace DeriSock.Model
 {
-  /// <summary>
-  ///   Continuation token for pagination
-  /// </summary>
-  [JsonProperty("continuation")]
-  public string Continuation { get; set; }
+  using Newtonsoft.Json;
 
-  [JsonProperty("entities")]
-  public UserStopOrder[] Entities { get; set; }
+  public class UserStopOrderCollection
+  {
+    /// <summary>
+    ///   Continuation token for pagination
+    /// </summary>
+    [JsonProperty("continuation")]
+    public string Continuation { get; set; }
+
+    [JsonProperty("entities")]
+    public UserStopOrder[] Entities { get; set; }
+  }
 }

@@ -1,18 +1,19 @@
-﻿namespace DeriSock.Model;
-
-using Newtonsoft.Json;
-
-public class MarketSettlementCollection
+﻿namespace DeriSock.Model
 {
-  /// <summary>
-  ///   Continuation token for pagination.
-  /// </summary>
-  [JsonProperty("continuation")]
-  public string Continuation { get; set; }
+  using Newtonsoft.Json;
 
-  /// <summary>
-  ///   of object
-  /// </summary>
-  [JsonProperty("settlements")]
-  public MarketSettlement[] Settlements { get; set; }
+  public class MarketSettlementCollection
+  {
+    /// <summary>
+    ///   Continuation token for pagination.
+    /// </summary>
+    [JsonProperty("continuation")]
+    public string Continuation { get; set; }
+
+    /// <summary>
+    ///   of object
+    /// </summary>
+    [JsonProperty("settlements")]
+    public MarketSettlement[] Settlements { get; set; }
+  }
 }

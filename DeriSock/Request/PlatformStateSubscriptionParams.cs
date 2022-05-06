@@ -1,9 +1,10 @@
-﻿namespace DeriSock.Request;
-
-public class PlatformStateSubscriptionParams : ISubscriptionChannel
+﻿namespace DeriSock.Request
 {
-  public string ToChannelName()
+  public class PlatformStateSubscriptionParams : ISubscriptionChannel
   {
-    return "platform_state";
+    public string ToChannelName()
+    {
+      return "platform_state";
+    }
   }
 }

@@ -1,6 +1,7 @@
-﻿namespace DeriSock.JsonRpc;
-
-public interface IWebSocketFactory
+﻿namespace DeriSock.JsonRpc
 {
-  IWebSocket Create();
+  public interface IWebSocketFactory
+  {
+    IWebSocket Create();
+  }
 }

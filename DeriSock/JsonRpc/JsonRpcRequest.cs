@@ -1,22 +1,23 @@
-﻿namespace DeriSock.JsonRpc;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
-public class JsonRpcRequest
+﻿namespace DeriSock.JsonRpc
 {
-  [JsonIgnore]
-  public JObject Original { get; set; }
+  using Newtonsoft.Json;
+  using Newtonsoft.Json.Linq;
 
-  [JsonProperty("jsonrpc")]
-  public string JsonRpc { get; set; } = "2.0";
+  public class JsonRpcRequest
+  {
+    [JsonIgnore]
+    public JObject Original { get; set; }
 
-  [JsonProperty("id")]
-  public int Id { get; set; }
+    [JsonProperty("jsonrpc")]
+    public string JsonRpc { get; set; } = "2.0";
 
-  [JsonProperty("method")]
-  public string Method { get; set; }
+    [JsonProperty("id")]
+    public int Id { get; set; }
 
-  [JsonProperty("params")]
-  public object Params { get; set; }
+    [JsonProperty("method")]
+    public string Method { get; set; }
+
+    [JsonProperty("params")]
+    public object Params { get; set; }
+  }
 }

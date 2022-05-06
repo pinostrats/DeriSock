@@ -1,9 +1,10 @@
-﻿namespace DeriSock.Model;
-
-using Newtonsoft.Json;
-
-public class ServerHello
+﻿namespace DeriSock.Model
 {
-  [JsonProperty("version")]
-  public string Version { get; set; }
+  using Newtonsoft.Json;
+
+  public class ServerHello
+  {
+    [JsonProperty("version")]
+    public string Version { get; set; }
+  }
 }
