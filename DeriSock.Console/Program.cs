@@ -32,6 +32,14 @@
         .AddUserSecrets(Assembly.GetExecutingAssembly(), false, false)
         .Build();
 
+
+      if (GetSocks5Settings(confRoot, out Socks5Settings socks5Settings))
+      {
+        // Using socks5 proxy
+      
+        WebSocketFactory.Register(new Socks5WebSocketFactory(socks5Settings));
+      } 
+      
       var apiSettings = confRoot.GetSection("api_master");
 
       var clientId = apiSettings["ClientId"];
@@ -119,6 +127,33 @@
       Console.ReadKey();
 
       return 0;
+    }
+
+    private static bool GetSocks5Settings(IConfigurationRoot confRoot, out Socks5Settings socks5Settings)
+    {
+      socks5Settings = null;
+      /*
+       * Add settings to your user secrets in the format below:
+       * 
+          "socks5_proxy": {
+            "Address": "socks5://www.proxy.net:1080",
+            "Username": "john@john.com",
+            "Password": "abcdef"
+          }
+       *  
+       */
+      var settings = confRoot.GetSection("socks5_proxy");
+      if (settings["Address"] == null || settings["Username"] == null || settings["Password"] == null)
+      {
+        return false;
+      }
+
+      socks5Settings = new Socks5Settings()
+      {
+        Address = new Uri(settings["Address"]), Username = settings["Username"], Password = settings["Password"]
+      };
+
+      return true;
     }
 
     private static void OnConnected(object sender, EventArgs e)

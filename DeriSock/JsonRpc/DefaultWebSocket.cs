@@ -1,4 +1,6 @@
-﻿namespace DeriSock.JsonRpc
+﻿using System.Net;
+
+namespace DeriSock.JsonRpc
 {
   using System;
   using System.Net.WebSockets;
@@ -7,7 +9,7 @@
 
   public class DefaultWebSocket : IWebSocket
   {
-    private readonly ClientWebSocket _socket;
+    protected readonly ClientWebSocket _socket;
 
     public DefaultWebSocket()
     {
