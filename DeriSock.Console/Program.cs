@@ -33,12 +33,7 @@
         .Build();
 
 
-      if (GetSocks5Settings(confRoot, out Socks5Settings socks5Settings))
-      {
-        // Using socks5 proxy
-      
-        WebSocketFactory.Register(new Socks5WebSocketFactory(socks5Settings));
-      } 
+     
       
       var apiSettings = confRoot.GetSection("api_master");
 
@@ -62,6 +57,12 @@
         .Destructure.ByTransforming<Heartbeat>(JsonConvert.SerializeObject)
         .CreateLogger();
 
+      if (GetSocks5Settings(confRoot, out Socks5Settings socks5Settings))
+      {
+        // Using socks5 proxy
+        WebSocketFactory.Register(new Socks5WebSocketFactory(socks5Settings, Log.Logger));
+      } 
+      
       _client = new DeribitV2Client(DeribitEndpointType.Testnet);
       _client.Connected += OnConnected;
       _client.Disconnected += OnDisconnected;
