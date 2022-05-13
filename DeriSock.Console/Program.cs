@@ -18,6 +18,7 @@
 
   public static class Program
   {
+    private static readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
     private static DeribitV2Client _client;
     private static readonly ManualResetEventSlim DisconnectResetEvent = new ManualResetEventSlim(false);
 
@@ -72,7 +73,9 @@
         Log.Logger.Debug("SocketState: {State}", _client.State);
         try
         {
-          await _client.Connect();
+          // Allow 30 seconds to connect
+          cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(30));
+          await _client.Connect(cancellationTokenSource.Token);
 
           var sig = CryptoHelper.CreateSignature(clientSecret);
           var loginRes = await _client.PublicAuth(new AuthParams {GrantType = GrantType.Signature, ClientId = clientId, Signature = sig});

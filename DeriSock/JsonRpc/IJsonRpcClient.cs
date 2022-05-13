@@ -1,4 +1,6 @@
-﻿namespace DeriSock.JsonRpc
+﻿using System.Threading;
+
+namespace DeriSock.JsonRpc
 {
   using System;
   using System.Net.WebSockets;
@@ -24,6 +26,12 @@
     ///   Connects to the server using the <see cref="JsonRpcClient.ServerUri" /> and starts processing received messages
     /// </summary>
     Task Connect();
+
+    /// <summary>
+    ///   Connects to the server using the <see cref="JsonRpcClient.ServerUri" /> and starts processing received messages.
+    ///   Also make use of a cancellation token to timeout the connect operation
+    /// </summary>
+    Task Connect(CancellationToken cancellationToken);
 
     /// <summary>
     ///   Stops processing of received messages and disconnects from the server

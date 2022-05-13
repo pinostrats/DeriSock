@@ -1,5 +1,7 @@
 ﻿// ReSharper disable UnusedMember.Local
 
+using System.Threading;
+
 namespace DeriSock
 {
   using System;
@@ -58,9 +60,14 @@ namespace DeriSock
       _subscriptionManager = new SubscriptionManager(this);
     }
 
-    public async Task Connect()
+    public Task Connect()
     {
-      await _client.Connect();
+      return Connect(CancellationToken.None);
+    }
+
+    public async Task Connect(CancellationToken cancellationToken)
+    {
+      await _client.Connect(cancellationToken);
       AccessToken = null;
       RefreshToken = null;
       _subscriptionManager.Reset();

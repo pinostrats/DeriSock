@@ -40,9 +40,15 @@
     public WebSocketCloseStatus? CloseStatus { get; protected set; }
     public string CloseStatusDescription { get; protected set; }
     public Exception Error { get; protected set; }
+
+    /// <inheritdoc />
+    public virtual Task Connect()
+    {
+        return Connect(CancellationToken.None);
+    }
     
     /// <inheritdoc />
-    public virtual async Task Connect()
+    public virtual async Task Connect(CancellationToken cancellationToken)
     {
       if (Socket != null)
       {
@@ -62,7 +68,7 @@
       Socket = WebSocketFactory.Create();
       try
       {
-        await Socket.ConnectAsync(ServerUri, CancellationToken.None).ConfigureAwait(false);
+        await Socket.ConnectAsync(ServerUri, cancellationToken).ConfigureAwait(false);
       }
       catch (Exception ex)
       {
