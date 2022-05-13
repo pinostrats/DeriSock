@@ -18,7 +18,6 @@
 
   public static class Program
   {
-    private static readonly CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
     private static DeribitV2Client _client;
     private static readonly ManualResetEventSlim DisconnectResetEvent = new ManualResetEventSlim(false);
 
@@ -74,6 +73,7 @@
         try
         {
           // Allow 30 seconds to connect
+          CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
           cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(30));
           await _client.Connect(cancellationTokenSource.Token);
 
