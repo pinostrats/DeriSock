@@ -3,8 +3,10 @@ namespace DeriSock.Converter;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
+/// <inheritdoc />
 public class ListJsonConverter<T> : IJsonConverter<List<T>>
 {
+  /// <inheritdoc />
   public List<T> Convert(JToken value)
   {
     var list = (JArray)value;

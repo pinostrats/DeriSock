@@ -3,6 +3,9 @@
 using System;
 using Newtonsoft.Json;
 
+/// <summary>
+///   User account summary
+/// </summary>
 public class AccountSummary
 {
   /// <summary>
@@ -47,6 +50,9 @@ public class AccountSummary
   [JsonProperty("username")]
   public string Username { get; set; }
 
+  /// <summary>
+  ///   Information about rate limits enforced on the account
+  /// </summary>
   [JsonProperty("limits")]
   public LimitsItem Limits { get; set; }
 
@@ -146,10 +152,7 @@ public class AccountSummary
   ///   The sum of position deltas + INCLUDING your collateral.
   /// </summary>
   [JsonIgnore]
-  public decimal DeltaTotalWithCollateral
-  {
-    get { return DeltaTotal + Equity; }
-  }
+  public decimal DeltaTotalWithCollateral => DeltaTotal + Equity;
 
   /// <summary>
   ///   Options profit and loss
@@ -176,7 +179,7 @@ public class AccountSummary
   public decimal InitialMargin { get; set; }
 
   /// <summary>
-  ///  The account's estimated liquidation ratio.
+  ///   The account's estimated liquidation ratio.
   /// </summary>
   [JsonProperty("estimated_liquidation_ratio")]
   public decimal EstimatedLiquidationRatio { get; set; }
@@ -241,7 +244,7 @@ public class AccountSummary
   public decimal OptionsDelta { get; set; }
 
   /// <summary>
-  ///  Projected Delta total
+  ///   Projected Delta total
   /// </summary>
   [JsonProperty("projected_delta_total")]
   public decimal ProjectedDeltaTotal { get; set; }
@@ -264,6 +267,9 @@ public class AccountSummary
   [JsonProperty("deposit_address")]
   public string DepositAddress { get; set; }
 
+  /// <summary>
+  ///   Various rate limits enforced on the account
+  /// </summary>
   public class LimitsItem
   {
     /// <summary>
@@ -280,7 +286,7 @@ public class AccountSummary
   }
 
   /// <summary>
-  /// Matching engine limits holder
+  ///   Matching engine limits holder
   /// </summary>
   public class EngineMatchItem
   {
@@ -297,6 +303,9 @@ public class AccountSummary
     public int Burst { get; set; }
   }
 
+  /// <summary>
+  ///   Information about a fee entry
+  /// </summary>
   public class FeesItem
   {
     /// <summary>

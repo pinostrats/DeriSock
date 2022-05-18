@@ -3,7 +3,7 @@
 using System;
 using Newtonsoft.Json.Linq;
 
-public class TimestampJsonConverter : IJsonConverter<DateTime>
+internal class TimestampJsonConverter : IJsonConverter<DateTime>
 {
   public DateTime Convert(JToken value)
   {

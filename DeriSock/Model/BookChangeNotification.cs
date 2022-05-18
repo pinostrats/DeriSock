@@ -76,7 +76,10 @@ public class BookChangeNotification
       JsonSerializer serializer)
     {
       var arr = JArray.Load(reader);
-      return new ActionItem {Action = arr[0].Value<string>(), Price = arr[1].Value<decimal>(), Amount = arr[2].Value<decimal>()};
+      return new ActionItem
+      {
+        Action = arr[0].Value<string>(), Price = arr[1].Value<decimal>(), Amount = arr[2].Value<decimal>()
+      };
     }
   }
 }

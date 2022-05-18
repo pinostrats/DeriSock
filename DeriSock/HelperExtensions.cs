@@ -2,6 +2,9 @@
 
 using System;
 
+/// <summary>
+/// Provides some Extension Methods for various types
+/// </summary>
 public static class HelperExtensions
 {
   private static readonly long _ticksPerMillisecond = TimeSpan.TicksPerMillisecond;

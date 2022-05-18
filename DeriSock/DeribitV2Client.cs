@@ -29,8 +29,14 @@ public class DeribitV2Client
   private readonly SubscriptionManager _subscriptionManager;
   protected readonly ILogger Logger;
 
+  /// <summary>
+  /// The AccessToken received from the server after authentication
+  /// </summary>
   public string AccessToken { get; private set; }
 
+  /// <summary>
+  /// The RefreshToken received from the server after authentication
+  /// </summary>
   public string RefreshToken { get; private set; }
 
   public WebSocketState State => _client.State;
@@ -38,6 +44,12 @@ public class DeribitV2Client
   public string CloseStatusDescription => _client.CloseStatusDescription;
   public Exception Error => _client.Error;
 
+  /// <summary>
+  /// Creates a new <see cref="DeribitV2Client"/> instance
+  /// </summary>
+  /// <param name="endpointType">The network type. Productive or Testnet</param>
+  /// <param name="logger">The logger to be used. Uses a default logger if <c>null</c></param>
+  /// <exception cref="ArgumentOutOfRangeException">Throws an exception if the <paramref name="endpointType"/> is not recognized</exception>
   public DeribitV2Client(DeribitEndpointType endpointType, ILogger logger = null)
   {
     Logger = logger ?? Log.Logger;
@@ -363,7 +375,13 @@ public class DeribitV2Client
       {
         var unsubscribeResponse = await _client.Send(
           IsPrivateChannel(channelName) ? "private/unsubscribe" : "public/unsubscribe",
-          new {channels = new[] {channelName}},
+          new
+          {
+            channels = new[]
+            {
+              channelName
+            }
+          },
           new ListJsonConverter<string>()).ConfigureAwait(false);
 
         var response = unsubscribeResponse.ResultData;
@@ -540,7 +558,10 @@ public class DeribitV2Client
         throw new ArgumentNullException(nameof(RefreshToken));
       }
 
-      reqParams = new {grant_type = "refresh_token", refresh_token = RefreshToken};
+      reqParams = new
+      {
+        grant_type = "refresh_token", refresh_token = RefreshToken
+      };
     }
 
     var response = await Send("public/auth", reqParams, new ObjectJsonConverter<AuthInfo>());
@@ -567,7 +588,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/exchange_token",
-      new {refresh_token = refreshToken, subject_id = subjectId},
+      new
+      {
+        refresh_token = refreshToken, subject_id = subjectId
+      },
       new ObjectJsonConverter<AuthInfo>());
   }
 
@@ -580,7 +604,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/fork_token",
-      new {refresh_token = refreshToken, session_name = sessionName},
+      new
+      {
+        refresh_token = refreshToken, session_name = sessionName
+      },
       new ObjectJsonConverter<AuthInfo>());
   }
 
@@ -620,7 +647,10 @@ public class DeribitV2Client
   /// <param name="interval">The heartbeat interval in seconds, but not less than 10</param>
   public Task<JsonRpcResponse<string>> PublicSetHeartbeat(int interval)
   {
-    return Send("public/set_heartbeat", new {interval}, new ObjectJsonConverter<string>());
+    return Send("public/set_heartbeat", new
+    {
+      interval
+    }, new ObjectJsonConverter<string>());
   }
 
   /// <summary>
@@ -671,7 +701,10 @@ public class DeribitV2Client
     //TODO: check if private method works without access_token being sent
     return Send(
       "private/enable_cancel_on_disconnect",
-      new {scope /*, access_token = AccessToken*/},
+      new
+      {
+        scope /*, access_token = AccessToken*/
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -703,17 +736,16 @@ public class DeribitV2Client
     //TODO: check if private method works without access_token being sent
     return Send(
       "private/disable_cancel_on_disconnect",
-      new {scope /*, access_token = AccessToken*/},
+      new
+      {
+        scope /*, access_token = AccessToken*/
+      },
       new ObjectJsonConverter<string>());
   }
 
   /// <summary>
   ///   Read current Cancel On Disconnect configuration for the account
   /// </summary>
-  /// <param name="scope">
-  ///   Specifies if Cancel On Disconnect change should be applied/checked for the current connection or
-  ///   the account (default - <c>connection</c>)
-  /// </param>
   public Task<JsonRpcResponse<CancelOnDisconnectInfo>> PrivateGetCancelOnDisconnect()
   {
     return PrivateGetCancelOnDisconnect("connection");
@@ -731,7 +763,10 @@ public class DeribitV2Client
     //TODO: check if private method works without access_token being sent
     return Send(
       "private/get_cancel_on_disconnect",
-      new {scope /*, access_token = AccessToken*/},
+      new
+      {
+        scope /*, access_token = AccessToken*/
+      },
       new ObjectJsonConverter<CancelOnDisconnectInfo>());
   }
 
@@ -760,7 +795,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/hello",
-      new {client_name = clientName, client_version = clientVersion},
+      new
+      {
+        client_name = clientName, client_version = clientVersion
+      },
       new ObjectJsonConverter<ServerHello>());
   }
 
@@ -776,7 +814,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/test",
-      new {expected_result = expectedResult},
+      new
+      {
+        expected_result = expectedResult
+      },
       new ObjectJsonConverter<ServerHello>());
   }
 
@@ -793,7 +834,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/get_account_summary",
-      new {currency, extended},
+      new
+      {
+        currency, extended
+      },
       new ObjectJsonConverter<AccountSummary>());
   }
 
@@ -819,7 +863,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/set_email_language",
-      new {language},
+      new
+      {
+        language
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -831,7 +878,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/get_position",
-      new {instrument_name = instrumentName},
+      new
+      {
+        instrument_name = instrumentName
+      },
       new ObjectJsonConverter<UserPosition>());
   }
 
@@ -872,7 +922,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/get_announcements",
-      new {start_timestamp = startTime.AsMilliseconds()},
+      new
+      {
+        start_timestamp = startTime.AsMilliseconds()
+      },
       new ObjectJsonConverter<Announcement[]>());
   }
 
@@ -886,7 +939,10 @@ public class DeribitV2Client
 
     return Send(
       "public/get_announcements",
-      new {count},
+      new
+      {
+        count
+      },
       new ObjectJsonConverter<Announcement[]>());
   }
 
@@ -905,7 +961,10 @@ public class DeribitV2Client
 
     return Send(
       "public/get_announcements",
-      new {start_timestamp = startTime.AsMilliseconds(), count},
+      new
+      {
+        start_timestamp = startTime.AsMilliseconds(), count
+      },
       new ObjectJsonConverter<Announcement[]>());
   }
 
@@ -928,7 +987,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/set_announcement_as_read",
-      new {announcement_id = id},
+      new
+      {
+        announcement_id = id
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -946,7 +1008,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/change_api_key_name",
-      new {id, name},
+      new
+      {
+        id, name
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -960,7 +1025,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/change_scope_in_api_key",
-      new {id, max_scope = maxScope},
+      new
+      {
+        id, max_scope = maxScope
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -970,7 +1038,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/create_api_key",
-      new {max_scope = maxScope},
+      new
+      {
+        max_scope = maxScope
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -980,7 +1051,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/create_api_key",
-      new {name, max_scope = maxScope},
+      new
+      {
+        name, max_scope = maxScope
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -990,7 +1064,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/create_api_key",
-      new {@default = asDefault, max_scope = maxScope},
+      new
+      {
+        @default = asDefault, max_scope = maxScope
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -1005,7 +1082,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/create_api_key",
-      new {name, @default = asDefault, max_scope = maxScope},
+      new
+      {
+        name, @default = asDefault, max_scope = maxScope
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -1018,7 +1098,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/disable_api_key",
-      new {id},
+      new
+      {
+        id
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -1031,7 +1114,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/enable_api_key",
-      new {id},
+      new
+      {
+        id
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -1054,7 +1140,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/remove_api_key",
-      new {id},
+      new
+      {
+        id
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -1067,7 +1156,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/reset_api_key",
-      new {id},
+      new
+      {
+        id
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -1080,7 +1172,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/set_api_key_as_default",
-      new {id},
+      new
+      {
+        id
+      },
       new ObjectJsonConverter<ApiKeyInfo>());
   }
 
@@ -1098,7 +1193,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/change_subaccount_name",
-      new {sid, name},
+      new
+      {
+        sid, name
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -1122,7 +1220,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/disable_tfa_for_subaccount",
-      new {sid},
+      new
+      {
+        sid
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -1144,7 +1245,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/get_subaccounts",
-      new {with_portfolio = withPortfolio},
+      new
+      {
+        with_portfolio = withPortfolio
+      },
       new ObjectJsonConverter<SubAccount[]>());
   }
 
@@ -1158,7 +1262,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/set_email_for_subaccount",
-      new {sid, email},
+      new
+      {
+        sid, email
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -1172,7 +1279,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/set_password_for_subaccount",
-      new {sid, password},
+      new
+      {
+        sid, password
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -1186,7 +1296,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/toggle_notifications_from_subaccount",
-      new {sid, state},
+      new
+      {
+        sid, state
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -1201,7 +1314,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/toggle_subaccount_login",
-      new {sid, state = state ? "enable" : "disable"},
+      new
+      {
+        sid, state = state ? "enable" : "disable"
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -1253,7 +1369,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/get_block_trade",
-      new {id},
+      new
+      {
+        id
+      },
       new ObjectJsonConverter<BlockTrade>());
   }
 
@@ -1303,7 +1422,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/invalidate_block_trade_signature",
-      new {signature},
+      new
+      {
+        signature
+      },
       new ObjectJsonConverter<string>());
   }
 
@@ -1522,7 +1644,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/cancel",
-      new {order_id = orderId},
+      new
+      {
+        order_id = orderId
+      },
       new ObjectJsonConverter<UserOrder>());
   }
 
@@ -1602,7 +1727,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/cancel_by_label",
-      new {label},
+      new
+      {
+        label
+      },
       new ObjectJsonConverter<int>());
   }
 
@@ -1645,7 +1773,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/get_margins",
-      new {instrument_name = instrumentName, amount, price},
+      new
+      {
+        instrument_name = instrumentName, amount, price
+      },
       new ObjectJsonConverter<UserMargin>());
   }
 
@@ -1803,7 +1934,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/get_order_margin_by_ids",
-      new {ids},
+      new
+      {
+        ids
+      },
       new ObjectJsonConverter<UserOrderMargin[]>());
   }
 
@@ -1815,7 +1949,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/get_order_state",
-      new {order_id = orderId},
+      new
+      {
+        order_id = orderId
+      },
       new ObjectJsonConverter<UserOrder>());
   }
 
@@ -2208,7 +2345,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/get_book_summary_by_instrument",
-      new {instrument_name = instrumentName},
+      new
+      {
+        instrument_name = instrumentName
+      },
       new ObjectJsonConverter<BookSummary[]>());
   }
 
@@ -2220,7 +2360,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/get_contract_size",
-      new {instrument_name = instrumentName},
+      new
+      {
+        instrument_name = instrumentName
+      },
       new ObjectJsonConverter<InstrumentContractSize>());
   }
 
@@ -2245,7 +2388,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/get_funding_chart_data",
-      new {instrument_name = instrumentName, length},
+      new
+      {
+        instrument_name = instrumentName, length
+      },
       new ObjectJsonConverter<PerpetualUserTrades>());
   }
 
@@ -2259,7 +2405,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/get_funding_rate_history",
-      new {instrument_name = instrumentName, start_timestamp = startTime.AsMilliseconds(), end_timestamp = endTime.AsMilliseconds()},
+      new
+      {
+        instrument_name = instrumentName, start_timestamp = startTime.AsMilliseconds(), end_timestamp = endTime.AsMilliseconds()
+      },
       new ObjectJsonConverter<InterestRate[]>());
   }
 
@@ -2273,7 +2422,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/get_funding_rate_value",
-      new {instrument_name = instrumentName, start_timestamp = startTime.AsMilliseconds(), end_timestamp = endTime.AsMilliseconds()},
+      new
+      {
+        instrument_name = instrumentName, start_timestamp = startTime.AsMilliseconds(), end_timestamp = endTime.AsMilliseconds()
+      },
       new ObjectJsonConverter<decimal>());
   }
 
@@ -2285,7 +2437,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/get_historical_volatility",
-      new {currency},
+      new
+      {
+        currency
+      },
       new ObjectJsonConverter<VolatilityItem[]>());
   }
 
@@ -2297,7 +2452,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/get_index",
-      new {currency},
+      new
+      {
+        currency
+      },
       new ObjectJsonConverter<IndexPrice>());
   }
 
@@ -2655,10 +2813,7 @@ public class DeribitV2Client
       args.TryAdd("depth", depth);
     }
 
-    return Send(
-      "public/get_order_book",
-      args,
-      new ObjectJsonConverter<OrderBook>());
+    return Send("public/get_order_book", args, new ObjectJsonConverter<OrderBook>());
   }
 
   /// <summary>
@@ -2689,7 +2844,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/get_tradingview_chart_data",
-      new {instrument_name = instrumentName, start_timestamp = startTime.AsMilliseconds(), end_timestamp = endTime.AsMilliseconds(), resolution},
+      new
+      {
+        instrument_name = instrumentName, start_timestamp = startTime.AsMilliseconds(), end_timestamp = endTime.AsMilliseconds(), resolution
+      },
       new ObjectJsonConverter<TradingViewMarketData>());
   }
 
@@ -2701,7 +2859,10 @@ public class DeribitV2Client
   {
     return Send(
       "public/ticker",
-      new {instrument_name = instrumentName},
+      new
+      {
+        instrument_name = instrumentName
+      },
       new ObjectJsonConverter<TickerData>());
   }
 
@@ -2741,7 +2902,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/cancel_withdrawal",
-      new {currency, id},
+      new
+      {
+        currency, id
+      },
       new ObjectJsonConverter<WithdrawalInfo>());
   }
 
@@ -2753,7 +2917,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/create_deposit_address",
-      new {currency},
+      new
+      {
+        currency
+      },
       new ObjectJsonConverter<DepositAddress>());
   }
 
@@ -2765,7 +2932,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/get_current_deposit_address",
-      new {currency},
+      new
+      {
+        currency
+      },
       new ObjectJsonConverter<DepositAddress>());
   }
 
@@ -2860,7 +3030,10 @@ public class DeribitV2Client
   {
     return Send(
       "private/submit_transfer_to_subaccount",
-      new {currency, amount, destination},
+      new
+      {
+        currency, amount, destination
+      },
       new ObjectJsonConverter<TransferInfo>());
   }
 
@@ -3133,7 +3306,12 @@ public class DeribitV2Client
     return _subscriptionManager.Subscribe(@params,
       n =>
       {
-        callback(@params.Interval.Equals("raw") ? new[] {n.Data.ToObject<UserOrder>()} : n.Data.ToObject<UserOrder[]>());
+        callback(@params.Interval.Equals("raw")
+          ? new[]
+          {
+            n.Data.ToObject<UserOrder>()
+          }
+          : n.Data.ToObject<UserOrder[]>());
       });
   }
 
@@ -3145,7 +3323,12 @@ public class DeribitV2Client
     return _subscriptionManager.Subscribe(@params,
       n =>
       {
-        callback(@params.Interval.Equals("raw") ? new[] {n.Data.ToObject<UserOrder>()} : n.Data.ToObject<UserOrder[]>());
+        callback(@params.Interval.Equals("raw")
+          ? new[]
+          {
+            n.Data.ToObject<UserOrder>()
+          }
+          : n.Data.ToObject<UserOrder[]>());
       });
   }
 
