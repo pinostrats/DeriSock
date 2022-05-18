@@ -1,9 +1,8 @@
-namespace DeriSock.Converter
-{
-  using Newtonsoft.Json.Linq;
+namespace DeriSock.Converter;
 
-  public interface IJsonConverter<out T>
-  {
-    T Convert(JToken value);
-  }
+using Newtonsoft.Json.Linq;
+
+public interface IJsonConverter<out T>
+{
+  T Convert(JToken value);
 }

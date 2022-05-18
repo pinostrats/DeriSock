@@ -1,20 +1,19 @@
-﻿namespace DeriSock.JsonRpc
+﻿namespace DeriSock.JsonRpc;
+
+using System;
+using Serilog;
+
+public static class JsonRpcClientFactory
 {
-  using System;
-  using Serilog;
+  private static IJsonRpcClientFactory _factory;
 
-  public static class JsonRpcClientFactory
+  public static void Register(IJsonRpcClientFactory factory)
   {
-    private static IJsonRpcClientFactory _factory;
+    _factory = factory;
+  }
 
-    public static void Register(IJsonRpcClientFactory factory)
-    {
-      _factory = factory;
-    }
-
-    public static IJsonRpcClient Create(Uri serverUri, ILogger logger)
-    {
-      return _factory != null ? _factory.Create(serverUri) : new JsonRpcClient(serverUri, logger);
-    }
+  public static IJsonRpcClient Create(Uri serverUri, ILogger logger)
+  {
+    return _factory != null ? _factory.Create(serverUri) : new JsonRpcClient(serverUri, logger);
   }
 }

@@ -1,9 +1,8 @@
-﻿namespace DeriSock.JsonRpc
-{
-  using System;
+﻿namespace DeriSock.JsonRpc;
 
-  public interface IJsonRpcClientFactory
-  {
-    IJsonRpcClient Create(Uri serverUri);
-  }
+using System;
+
+public interface IJsonRpcClientFactory
+{
+  IJsonRpcClient Create(Uri serverUri);
 }

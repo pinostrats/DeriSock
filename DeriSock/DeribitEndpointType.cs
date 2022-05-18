@@ -1,8 +1,7 @@
-﻿namespace DeriSock
+﻿namespace DeriSock;
+
+public enum DeribitEndpointType
 {
-  public enum DeribitEndpointType
-  {
-    Productive,
-    Testnet
-  }
+  Productive,
+  Testnet
 }
