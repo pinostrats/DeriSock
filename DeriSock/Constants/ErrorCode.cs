@@ -1,5 +1,6 @@
 ﻿// ReSharper disable StringLiteralTypo
 
+#pragma warning disable CS1591
 namespace DeriSock.Constants;
 
 public sealed class ErrorCode
@@ -11,14 +12,12 @@ public sealed class ErrorCode
   public static ErrorCode OrderOverlap = new(10003, "order_overlap", "Rejection, order overlap is found and self-trading is not enabled.");
   public static ErrorCode OrderNotFound = new(10004, "order_not_found", "Attempt to operate with order that can't be found by specified id.");
 
-  public static ErrorCode PriceTooLowLimit =
-    new(10005, "price_too_low<Limit>", "Price is too low, <Limit> defines current limit for the operation.");
+  public static ErrorCode PriceTooLowLimit = new(10005, "price_too_low<Limit>", "Price is too low, <Limit> defines current limit for the operation.");
 
   public static ErrorCode PriceTooLowForIndex = new(10006, "price_too_low4idx <Limit>",
     "Price is too low for current index, <Limit> defines current bottom limit for the operation.");
 
-  public static ErrorCode PriceTooHighLimit =
-    new(10007, "price_too_high <Limit>", "Price is too high, <Limit> defines current up limit for the operation.");
+  public static ErrorCode PriceTooHighLimit = new(10007, "price_too_high <Limit>", "Price is too high, <Limit> defines current up limit for the operation.");
 
   public static ErrorCode PriceTooHigh4Index = new(10008, "price_too_high4idx <Limit>",
     "Price is too high for current index, <Limit> defines current up limit for the operation.");
@@ -55,8 +54,7 @@ public sealed class ErrorCode
   public static ErrorCode InvalidOrderId = new(10025, "invalid_order_id", "Order id is missing or its format was not recognized as valid.");
   public static ErrorCode PricePrecisionExceeded = new(10026, "price_precision_exceeded", "Extra precision of the price is not supported.");
 
-  public static ErrorCode NonIntegerContractAmount =
-    new(10027, "non_integer_contract_amount", "Futures contract amount was not recognized as integer.");
+  public static ErrorCode NonIntegerContractAmount = new(10027, "non_integer_contract_amount", "Futures contract amount was not recognized as integer.");
 
   public static ErrorCode TooManyRequests = new(10028, "too_many_requests", "Allowed request rate has been exceeded.");
   public static ErrorCode NotOwnerOfOrder = new(10029, "not_owner_of_order", "Attempt to operate with not own order.");
@@ -77,13 +75,11 @@ public sealed class ErrorCode
   public static ErrorCode CannotCancelLiquidationOrder = new(10045, "can_not_cancel_liquidation_order", "Liquidation order can't be canceled.");
   public static ErrorCode CannotEditLiquidationOrder = new(10046, "can_not_edit_liquidation_order", "Liquidation order can't be edited.");
 
-  public static ErrorCode MatchingEngineQueueFull =
-    new(10047, "matching_engine_queue_full", "Reached limit of pending Matching Engine requests for user.");
+  public static ErrorCode MatchingEngineQueueFull = new(10047, "matching_engine_queue_full", "Reached limit of pending Matching Engine requests for user.");
 
   public static ErrorCode NotOnThisServer = new(10048, "not_on_this_server", "The requested operation is not available on this server.");
 
-  public static ErrorCode CancelOnDisconnectFailed =
-    new(10049, "cancel_on_disconnect_failed", "Enabling Cancel On Disconnect for the connection failed.");
+  public static ErrorCode CancelOnDisconnectFailed = new(10049, "cancel_on_disconnect_failed", "Enabling Cancel On Disconnect for the connection failed.");
 
   public static ErrorCode AlreadyFilled = new(11008, "already_filled", "This request is not allowed in regards to the filled order.");
   public static ErrorCode InvalidArguments = new(11029, "invalid_arguments", "Some invalid input has been detected.");
@@ -96,11 +92,9 @@ public sealed class ErrorCode
 
   public static ErrorCode NoMoreStops = new(11035, "no_more_stops <Limit>", "Allowed amount of stop orders has been exceeded.");
 
-  public static ErrorCode InvalidStopPxForIndexOrLast =
-    new(11036, "invalid_stoppx_for_index_or_last", "Invalid StopPx (too high or too low) as to current index or market.");
+  public static ErrorCode InvalidStopPxForIndexOrLast = new(11036, "invalid_stoppx_for_index_or_last", "Invalid StopPx (too high or too low) as to current index or market.");
 
-  public static ErrorCode OutdatedInstrumentForIvOrder =
-    new(11037, "outdated_instrument_for_IV_order", "Instrument already not available for trading.");
+  public static ErrorCode OutdatedInstrumentForIvOrder = new(11037, "outdated_instrument_for_IV_order", "Instrument already not available for trading.");
 
   public static ErrorCode NoAdvancedForFutures = new(11038, "no_adv_for_futures", "Advanced orders are not available for futures.");
   public static ErrorCode NoAdvancedPostOnly = new(11039, "no_adv_postonly", "Advanced post-only orders are not supported yet.");
@@ -113,8 +107,7 @@ public sealed class ErrorCode
   public static ErrorCode OutdatedInstrument = new(11046, "outdated_instrument",
     "At several minutes to instrument expiration, corresponding advanced implied volatility orders are not allowed.");
 
-  public static ErrorCode UnsupportedArgumentCombination =
-    new(11047, "unsupported_arg_combination", "The specified combination of arguments is not supported.");
+  public static ErrorCode UnsupportedArgumentCombination = new(11047, "unsupported_arg_combination", "The specified combination of arguments is not supported.");
 
   public static ErrorCode WrongMaxShowForOption = new(11048, "wrong_max_show_for_option", "Wrong Max Show for options.");
   public static ErrorCode BadArguments = new(11049, "bad_arguments", "Several bad arguments have been passed.");
@@ -133,8 +126,7 @@ public sealed class ErrorCode
   public static ErrorCode InternalServerError = new(11094, "internal_server_error",
     "Some unhandled error on server. Please report to admin. The details of the request will help to locate the problem.");
 
-  public static ErrorCode DisabledDepositAddressCreation =
-    new(11095, "disabled_deposit_address_creation", "Deposit address creation has been disabled by admin.");
+  public static ErrorCode DisabledDepositAddressCreation = new(11095, "disabled_deposit_address_creation", "Deposit address creation has been disabled by admin.");
 
   public static ErrorCode AddressBelongsToUser = new(11096, "address_belongs_to_user", "Withdrawal instead of transfer.");
   public static ErrorCode BadTfaCode = new(12000, "bad_tfa", "Wrong TFA code");
@@ -145,8 +137,7 @@ public sealed class ErrorCode
   public static ErrorCode RegistrationOverLimit = new(12004, "registration_over_limit", "The number of registration requests is limited.");
   public static ErrorCode CountryIsBanned = new(12005, "country_is_banned", "The country is banned (possibly via IP check).");
 
-  public static ErrorCode TransferNotAllowed =
-    new(12100, "transfer_not_allowed", "Transfer is not allowed. Possible wrong direction or other mistake.");
+  public static ErrorCode TransferNotAllowed = new(12100, "transfer_not_allowed", "Transfer is not allowed. Possible wrong direction or other mistake.");
 
   public static ErrorCode TfaUsed = new(12999, "tfa_used", "TFA code is correct but it is already used. Please, use next code.");
   public static ErrorCode InvalidLogin = new(13000, "invalid_login", "Login name is invalid (not allowed or it contains wrong characters).");
@@ -175,8 +166,7 @@ public sealed class ErrorCode
   public static ErrorCode NotFound = new(13020, "not_found", "Instrument is not found, invalid instrument name.");
   public static ErrorCode Forbidden = new(13021, "forbidden", "Not enough permissions to execute the request, forbidden.");
 
-  public static ErrorCode MethodSwitchedOffByAdmin =
-    new(13025, "method_switched_off_by_admin", "API method temporarily switched off by administrator.");
+  public static ErrorCode MethodSwitchedOffByAdmin = new(13025, "method_switched_off_by_admin", "API method temporarily switched off by administrator.");
 
   public static ErrorCode InvalidParams = new(-32602, "Invalid params", "see JSON-RPC spec.");
   public static ErrorCode MethodNotFound = new(-32601, "Method not found", "see JSON-RPC spec.");
