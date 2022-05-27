@@ -84,7 +84,7 @@ public class TickerData
   ///   The price for the last trade
   /// </summary>
   [JsonProperty("last_price")]
-  public decimal LastPrice { get; set; }
+  public decimal? LastPrice { get; set; }
 
   /// <summary>
   ///   (Only for option) implied volatility for mark price
